@@ -1,0 +1,23 @@
+{
+    "name": "iksaku/advent-of-code-2020",
+    "description": "2020 Advent Of Code",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jorge González",
+            "email": "yo@jorgeglz.io"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "require-dev": {},
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
