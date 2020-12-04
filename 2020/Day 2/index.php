@@ -1,5 +1,7 @@
 <?php
 
+use JetBrains\PhpStorm\Pure;
+
 include_once __DIR__.'/../vendor/autoload.php';
 
 $puzzle = file(__DIR__.'/puzzle.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -7,6 +9,7 @@ $puzzle = file(__DIR__.'/puzzle.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LI
 $valid_passwords_from_character_count = 0;
 $valid_passwords_from_character_position = 0;
 
+#[Pure]
 function character_count_restriction(
     string $password,
     string $character_restriction,
@@ -44,18 +47,18 @@ foreach ($puzzle as $line) {
 
     // Part 1
     if (character_count_restriction(
-        $password,
-        $restriction_letter,
-        (int) $restriction_min,
-        (int) $restriction_max
+        password: $password,
+        character_restriction: $restriction_letter,
+        min_count_restriction: (int) $restriction_min,
+        max_count_restriction: (int) $restriction_max
     )) ++$valid_passwords_from_character_count;
 
     // Part 2
     if (character_position_restriction(
-        $password,
-        $restriction_letter,
-        (int) $restriction_min,
-        (int) $restriction_max
+        password: $password,
+        character_restriction: $restriction_letter,
+        first_position: (int) $restriction_min,
+        second_position: (int) $restriction_max
     )) ++$valid_passwords_from_character_position;
 }
 
