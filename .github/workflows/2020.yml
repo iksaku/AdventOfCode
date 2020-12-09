@@ -35,11 +35,14 @@ jobs:
                 with:
                     path: ${{ steps.composer-cache-dir.outputs.dir }}
                     key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-                    restore-keys: composer
+                    restore-keys: ${{ runner.os }}-composer-
 
             - name: Install Composer Dependencies
               run: composer install --prefer-dist --no-interaction --no-suggest
 
-            - name: Test 2020 code
-              run: composer test
+#            - name: Test 2020 code
+#              run: composer test
+
+            - name: ls -1
+              run: ls -1
 
