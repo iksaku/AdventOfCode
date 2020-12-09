@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 include_once __DIR__.'/../vendor/autoload.php';
 
 class Restriction {
@@ -17,7 +19,7 @@ class Restriction {
         [$restriction_min, $restriction_max] = explode('-', $restriction_count);
         $restriction_letter = str_replace(':', '', $restriction_letter);
 
-        return new self($restriction_min, $restriction_max, $restriction_letter, $password);
+        return new self((int) $restriction_min, (int) $restriction_max, $restriction_letter, $password);
     }
 
     public static function makeMany(array $lines): array

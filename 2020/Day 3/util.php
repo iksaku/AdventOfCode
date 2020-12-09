@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 include_once __DIR__ . '/../vendor/autoload.php';
 
 function searchForTrees(array $puzzle, int $down_steps, int $right_steps): int
@@ -17,7 +19,7 @@ function searchForTrees(array $puzzle, int $down_steps, int $right_steps): int
         if ($right >= $line_length) {
             $tail = $right % $line_length === 0 ? 1 : 0;
 
-            $line = str_repeat($line, ceil($right / $line_length) + $tail);
+            $line = str_repeat($line, (int) (ceil($right / $line_length) + $tail));
         }
 
         $encountered_trees += $line[$right] === '#' ? 1 : 0;

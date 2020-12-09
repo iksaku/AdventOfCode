@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 include_once __DIR__ . '/../../Day 3/util.php';
 
 uses()->group('Day 3');
