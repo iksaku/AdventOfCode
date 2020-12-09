@@ -9,7 +9,7 @@
             <directory>./tests/Util</directory>
         </testsuite>
         <testsuite name="Puzzles">
-            <directory prefix="Day">./tests</directory>
+            <directory>./tests/Puzzles</directory>
         </testsuite>
     </testsuites>
 </phpunit>

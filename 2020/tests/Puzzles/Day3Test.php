@@ -1,6 +1,8 @@
 <?php
 
-include_once __DIR__.'/../Day 3/util.php';
+include_once __DIR__ . '/../../Day 3/util.php';
+
+uses()->group('Day 3');
 
 $example_puzzle = [
     '..##.......',
@@ -16,9 +18,8 @@ $example_puzzle = [
     '.#..#...#.#',
 ];
 
-it('can count encountered trees')
-    ->group('Day 3')
-    ->assertEquals(
+it('can count encountered trees', function () use ($example_puzzle) {
+    $this->assertEquals(
         expected: 7,
         actual: searchForTrees(
             puzzle: $example_puzzle,
@@ -26,10 +27,11 @@ it('can count encountered trees')
             right_steps: 3
         )
     );
+});
 
-it('can count encountered trees in bulk search')
-    ->group('Day 3')
-    ->assertEquals(
+it('can count encountered trees in bulk search', function () use ($example_puzzle) {
+    $this->assertEquals(
         expected: 336,
         actual: bulkSearchForTrees($example_puzzle)
     );
+});

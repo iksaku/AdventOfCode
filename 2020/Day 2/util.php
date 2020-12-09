@@ -20,6 +20,11 @@ class Restriction {
         return new self($restriction_min, $restriction_max, $restriction_letter, $password);
     }
 
+    public static function makeMany(array $lines): array
+    {
+        return array_map([Restriction::class, 'make'], $lines);
+    }
+
     public function isValidForSledRentalPlace(): bool
     {
         $password_character_count = array_count_values(str_split($this->password));
@@ -41,22 +46,11 @@ class Restriction {
     }
 }
 
-function asRestrictions(array $puzzle): array
-{
-    $restrictions = [];
-
-    foreach ($puzzle as $line) {
-        $restrictions[] = Restriction::make($line);
-    }
-
-    return $restrictions;
-}
-
 function solveForSledRentalPlace(array $puzzle): int
 {
     return count(
         array_filter(
-            asRestrictions($puzzle),
+            Restriction::makeMany($puzzle),
             fn(Restriction $restriction) => $restriction->isValidForSledRentalPlace()
         )
     );
@@ -66,7 +60,7 @@ function solveForTobogganCorporate(array $puzzle): int
 {
     return count(
         array_filter(
-            asRestrictions($puzzle),
+            Restriction::makeMany($puzzle),
             fn(Restriction $restriction) => $restriction->isValidForTobogganCorporate()
         )
     );

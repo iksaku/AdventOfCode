@@ -23,8 +23,6 @@ function searchForTrees(array $puzzle, int $down_steps, int $right_steps): int
         $encountered_trees += $line[$right] === '#' ? 1 : 0;
     }
 
-    echo "[Down: {$down_steps}, Right: {$right_steps}] Encountered {$encountered_trees} trees." . PHP_EOL;
-
     return $encountered_trees;
 }
 
