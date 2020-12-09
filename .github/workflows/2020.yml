@@ -3,9 +3,11 @@ name: Advent of Code 2020
 on:
     push:
         paths:
+            - '.github/workflows/2020.yml'
             - '2020/**.php'
     pull_request:
         paths:
+            - '.github/workflows/2020.yml'
             - '2020/**.php'
 
 defaults:
