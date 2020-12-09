@@ -3,6 +3,57 @@
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/2020/vendor/composer" />
+      <path value="$PROJECT_DIR$/2020/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/2020/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/2020/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/2020/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/2020/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/2020/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/2020/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/2020/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/2020/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/2020/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/2020/vendor/pestphp/pest-plugin-coverage" />
+      <path value="$PROJECT_DIR$/2020/vendor/pestphp/pest-plugin-init" />
+      <path value="$PROJECT_DIR$/2020/vendor/pestphp/pest-plugin" />
+      <path value="$PROJECT_DIR$/2020/vendor/pestphp/pest" />
+      <path value="$PROJECT_DIR$/2020/vendor/facade/ignition-contracts" />
+      <path value="$PROJECT_DIR$/2020/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/2020/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/2020/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/2020/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/2020/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/2020/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/2020/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/2020/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/2020/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/2020/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/2020/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/2020/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/2020/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/2020/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/2020/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/2020/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/2020/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/2020/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/2020/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/2020/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/2020/vendor/phpunit/php-code-coverage" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

@@ -12,7 +12,9 @@
     "require": {
         "php": "^8.0"
     },
-    "require-dev": {},
+    "require-dev": {
+        "pestphp/pest": "^0.3.15"
+    },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
