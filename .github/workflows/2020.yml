@@ -39,7 +39,7 @@ jobs:
                   key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
                   restore-keys: ${{ runner.os }}-composer-
 
-            - name: 🚚 Install Composer Dependencies
+            - name: 🚚 Install Composer Packages
               run: composer install --prefer-dist --no-interaction --no-suggest
 
             - name: 🤞 Run Tests
