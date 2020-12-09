@@ -19,29 +19,28 @@ jobs:
         name: Challenge Tests
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - name: 📡 Checkout Repo
+              uses: actions/checkout@v2
 
-            - name: Setup PHP 8
+            - name: 🐘 Setup PHP 8
               uses: shivammathur/setup-php@v2
               with:
                   php-version: '8.0'
                   tools: composer:v2
 
-            -   name: Get Composer Cache Directory
-                id: composer-cache-dir
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-            -   uses: actions/cache@v2
-                id: composer-cache
-                with:
-                    path: ${{ steps.composer-cache-dir.outputs.dir }}
-                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-                    restore-keys: ${{ runner.os }}-composer-
+            - name: 🗂️ Get Composer Cache Directory
+              id: composer-cache-dir
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+            - name: 📦 Configure Composer Cache
+              uses: actions/cache@v2
+              id: composer-cache
+              with:
+                  path: ${{ steps.composer-cache-dir.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: ${{ runner.os }}-composer-
 
-            - name: Install Composer Dependencies
+            - name: 🚚 Install Composer Dependencies
               run: composer install --prefer-dist --no-interaction --no-suggest
 
-            - name: Test Utility Functions
-              run: composer test -- --testsuite=Util
-
-            - name: Test Daily Example Puzzles
-              run: composer test -- --testsuite=Puzzles
+            - name: 🤞 Run Tests
+              run: composer test
