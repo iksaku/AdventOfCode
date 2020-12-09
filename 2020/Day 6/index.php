@@ -26,7 +26,7 @@ function chunkBetweenEmptyLines(array $lines): array
             continue;
         }
 
-        $current_group = $result[array_key_last($result)];
+        $current_group = array_value_last($result);
 
         ++$current_group->people;
         $current_group->addAnswers($line);

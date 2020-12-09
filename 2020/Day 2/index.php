@@ -1,9 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
-use JetBrains\PhpStorm\Pure;
-
 include_once __DIR__.'/../vendor/autoload.php';
 
 $puzzle = file(__DIR__.'/puzzle.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -11,7 +7,6 @@ $puzzle = file(__DIR__.'/puzzle.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LI
 $valid_passwords_from_character_count = 0;
 $valid_passwords_from_character_position = 0;
 
-#[Pure]
 function character_count_restriction(
     string $password,
     string $character_restriction,

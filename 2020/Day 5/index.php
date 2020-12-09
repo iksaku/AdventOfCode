@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 include_once __DIR__.'/../vendor/autoload.php';
 
 $puzzle = file(__DIR__.'/puzzle.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -45,7 +43,7 @@ foreach ($puzzle as $partition) {
 sort($seats);
 
 $min = $seats[0];
-$max = $seats[array_key_last($seats)];
+$max = array_value_last($seats);
 
 echo "Highest Seat ID is {$max}." . PHP_EOL;
 

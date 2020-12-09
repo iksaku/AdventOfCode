@@ -1,14 +1,10 @@
 <?php
 
-use JetBrains\PhpStorm\Pure;
-
-#[Pure]
 function hasExactDigits (string $needle, int $digits): bool
 {
     return strlen($needle) === $digits;
 }
 
-#[Pure]
 function isBetweenNumbers (int $needle, int $min, int $max): bool
 {
     return ($needle >= $min)
