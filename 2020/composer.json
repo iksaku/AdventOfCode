@@ -26,5 +26,8 @@
         "files": [
             "util.php"
         ]
+    },
+    "scripts": {
+        "test": "pest"
     }
 }

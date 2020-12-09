@@ -1,0 +1,31 @@
+name: Advent of Code 2020
+
+on:
+    push:
+        paths:
+            - '2020/**.php'
+    pull_request:
+        paths:
+            - '2020/**.php'
+
+defaults:
+    run:
+        working-directory: '2020'
+
+jobs:
+    ci:
+        name: Challenge Tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Setup PHP 8
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.0'
+                  tools: composer:v2
+
+            - name: Test Utility Functions
+              run: composer test -- --testsuite=Utility
+
+            - name: Test Puzzles (with short Examples from Advent of Code)
+              run: composer test -- --testsuite=Puzzles
+
