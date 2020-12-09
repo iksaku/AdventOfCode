@@ -40,9 +40,6 @@ jobs:
             - name: Install Composer Dependencies
               run: composer install --prefer-dist --no-interaction --no-suggest
 
-            - name: Test Utility Functions
-              run: composer test --testsuite=Utility
-
-            - name: Test Puzzles (with short Examples from Advent of Code)
-              run: composer test --testsuite=Puzzles
+            - name: Test 2020 code
+              run: composer test
 
