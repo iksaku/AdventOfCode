@@ -1,9 +1,8 @@
 <?php
 
-include_once __DIR__.'/../vendor/autoload.php';
-include_once __DIR__.'/../Day 1/functions.php';
+include_once __DIR__ . '/../Day 1/util.php';
 
-dataset('example_puzzle', [
+dataset('day_1_example', [
     [
         '1721',
         '979',
@@ -23,7 +22,7 @@ it('solves part 1 example', function (string ...$puzzle) {
         )
     );
 })
-    ->with('example_puzzle')
+    ->with('day_1_example')
     ->group('Day 1');
 
 it('solves part 2 example', function (string ...$puzzle) {
@@ -35,5 +34,5 @@ it('solves part 2 example', function (string ...$puzzle) {
         )
     );
 })
-    ->with('example_puzzle')
+    ->with('day_1_example')
     ->group('Day 1');
