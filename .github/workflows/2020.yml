@@ -43,5 +43,5 @@ jobs:
             - name: Test Utility Functions
               run: composer test -- --testsuite=Util
 
-            - name: Test 2020 code
+            - name: Test Daily Example Puzzles
               run: composer test -- --testsuite=Puzzles
