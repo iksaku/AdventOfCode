@@ -28,21 +28,6 @@ if (!function_exists('array_value_last')) {
     }
 }
 
-if (!function_exists('value')) {
-    /**
-     * Resolve a value
-     *
-     * @see https://github.com/illuminate/collections/blob/99889ebfe8eb73afa6859b316657f8cac6d20b1c/helpers.php#L175-L186
-     *
-     * @param mixed $value
-     * @return mixed
-     */
-    function value(mixed $value): mixed
-    {
-        return $value instanceof Closure ? $value() : $value;
-    }
-}
-
 if (!function_exists('array_first')) {
     /**
      * Obtain the first element in a Traversable that passes a given truth test.
@@ -62,7 +47,7 @@ if (!function_exists('array_first')) {
             }
         }
 
-        return value($default);
+        return $default instanceof Closure ? $default() : $default;
     }
 }
 

@@ -5,8 +5,8 @@
     colors="true"
 >
     <testsuites>
-        <testsuite name="Utility">
-            <file>./tests/UtilTest.php</file>
+        <testsuite name="Util">
+            <directory>./tests/Util</directory>
         </testsuite>
         <testsuite name="Puzzles">
             <directory prefix="Day">./tests</directory>
