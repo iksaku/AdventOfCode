@@ -40,9 +40,5 @@ jobs:
             - name: Install Composer Dependencies
               run: composer install --prefer-dist --no-interaction --no-suggest
 
-#            - name: Test 2020 code
-#              run: composer test
-
-            - name: ls -1
-              run: ls -1
-
+            - name: Test 2020 code
+              run: composer test
