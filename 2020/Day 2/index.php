@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-include_once __DIR__ . '/util.php';
+use function AdventOfCode2020\Day2\solveForSledRentalPlace;
+use function AdventOfCode2020\Day2\solveForTobogganCorporate;
+
+require_once __DIR__ . '/util.php';
 
 $puzzle = file(__DIR__.'/puzzle.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 

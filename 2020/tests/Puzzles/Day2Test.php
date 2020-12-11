@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
-include_once __DIR__ . '/../../Day 2/util.php';
+use AdventOfCode2020\Day2\Restriction;
+use function AdventOfCode2020\Day2\solveForSledRentalPlace;
+use function AdventOfCode2020\Day2\solveForTobogganCorporate;
+
+require_once __DIR__ . '/../../Day 2/util.php';
 
 uses()->group('Day 2');
 
@@ -15,11 +19,11 @@ $example_puzzle = [
 it('can generate restrictions from a string', function () use ($example_puzzle) {
     $this->assertEquals(
         expected: [
-        new Restriction(1, 3, 'a', 'abcde'),
-        new Restriction(1, 3, 'b', 'cdefg'),
-        new Restriction(2, 9, 'c', 'ccccccccc'),
-    ],
-        actual: Restriction::makeMany($example_puzzle)
+            new Restriction(1, 3, 'a', 'abcde'),
+            new Restriction(1, 3, 'b', 'cdefg'),
+            new Restriction(2, 9, 'c', 'ccccccccc'),
+        ],
+        actual: Restriction::make(...$example_puzzle)
     );
 });
 

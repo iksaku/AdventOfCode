@@ -24,7 +24,7 @@
     "prefer-stable": true,
     "autoload": {
         "files": [
-            "./util.php"
+            "helper.php"
         ]
     },
     "scripts": {

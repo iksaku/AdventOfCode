@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-include_once __DIR__ . '/../../Day 1/util.php';
+use function AdventOfCode2020\Day1\solve;
+
+require_once __DIR__.'/../../Day 1/util.php';
 
 uses()->group('Day 1');
 

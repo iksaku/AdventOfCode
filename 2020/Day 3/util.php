@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-include_once __DIR__ . '/../vendor/autoload.php';
+namespace AdventOfCode2020\Day3;
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 function searchForTrees(array $puzzle, int $down_steps, int $right_steps): int
 {
@@ -16,13 +18,11 @@ function searchForTrees(array $puzzle, int $down_steps, int $right_steps): int
         $line = $puzzle[$down];
         $line_length = strlen($line);
 
-        if ($right >= $line_length) {
-            $tail = $right % $line_length === 0 ? 1 : 0;
-
-            $line = str_repeat($line, (int) (ceil($right / $line_length) + $tail));
+        while ($right >= strlen($line)) {
+            $right -= $line_length;
         }
 
-        $encountered_trees += $line[$right] === '#' ? 1 : 0;
+        $encountered_trees += (int) ($line[$right] === '#');
     }
 
     return $encountered_trees;

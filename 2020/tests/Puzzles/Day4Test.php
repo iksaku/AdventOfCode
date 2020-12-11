@@ -2,14 +2,21 @@
 
 declare(strict_types=1);
 
-include_once __DIR__ . '/../../Day 4/util.php';
+use function AdventOfCode2020\Day4\between;
+use function AdventOfCode2020\Day4\digits;
+use function AdventOfCode2020\Day4\extractStringData;
+use function AdventOfCode2020\Day4\height;
+use function AdventOfCode2020\Day4\validateHasAllFields;
+use function AdventOfCode2020\Day4\validatePassport;
+
+require_once __DIR__.'/../../Day 4/util.php';
 
 uses()->group('Day 4');
 
 it('can validate number digits', function (string $number, int $digits, bool $result) {
     $this->assertEquals(
         expected: $result,
-        actual: Validator::digits($number, $digits)
+        actual: digits($number, $digits)
     );
 })->with([
     ['10', 4, false],
@@ -22,7 +29,7 @@ it('can validate number digits', function (string $number, int $digits, bool $re
 it('can validate number between other numbers', function (string $number, int $min, int $max, bool $result) {
     $this->assertEquals(
         expected: $result,
-        actual: Validator::between($number, $min, $max)
+        actual: between($number, $min, $max)
     );
 })->with([
     ['0', 1, 3, false],
@@ -35,7 +42,7 @@ it('can validate number between other numbers', function (string $number, int $m
 it('can validate height', function (string $height, bool $result) {
     $this->assertEquals(
         expected: $result,
-        actual: Validator::height($height)
+        actual: height($height)
     );
 })->with([
     ['149cm', false],
@@ -56,33 +63,31 @@ it('can validate height', function (string $height, bool $result) {
     ['165km', false],
 ]);
 
-it('can validate a regex pattern', function (string $needle, string $pattern, bool $result) {
+it('can extract passport data from a string', function (string $passport, array $result) {
     $this->assertEquals(
         expected: $result,
-        actual: Validator::regex($needle, $pattern)
+        actual: extractStringData($passport)
     );
 })->with([
-    ['a1b2c3', '/(\w\d)+/', true],
-    ['a1b2c3', '/^[1-9]+$/', false],
-    ['a1b2c3', '/^[a-z]+$/', false],
+    [
+        'ecl:gry pid:860033327 eyr:2020 hcl:#fffffd byr:1937 iyr:2017 cid:147 hgt:183cm',
+        [
+            'ecl' => 'gry',
+            'pid' => '860033327',
+            'eyr' => '2020',
+            'hcl' => '#fffffd',
+            'byr' => '1937',
+            'iyr' => '2017',
+            'cid' => '147',
+            'hgt' => '183cm',
+        ]
+    ]
 ]);
 
-it('can validate if needle is in an array', function (string $needle, array $haystack, bool $result) {
+it('can validate all passport fields are present', function (string $passport, bool $result) {
     $this->assertEquals(
         expected: $result,
-        actual: Validator::in($needle, ...$haystack)
-    );
-})->with([
-    ['foo', ['foo', 'bar'], true],
-    ['baz', ['foo', 'bar'], false],
-    ['blue', ['red', 'blue', 'green'], true],
-    ['cyan', ['red', 'blue', 'green'], false],
-]);
-
-it('can validate using a loose method', function (string $rule, bool $result) {
-    $this->assertEquals(
-        expected: $result,
-        actual: Validator::looseValidate($rule)
+        actual: validateHasAllFields(extractStringData($passport))
     );
 })->with([
     ['ecl:gry pid:860033327 eyr:2020 hcl:#fffffd byr:1937 iyr:2017 cid:147 hgt:183cm', true],
@@ -91,9 +96,9 @@ it('can validate using a loose method', function (string $rule, bool $result) {
     ['hcl:#cfa07d eyr:2025 pid:166559648 iyr:2011 ecl:brn hgt:59in', false],
 ]);
 
-it('fails with invalid passports', function (string $rule) {
+it('fails when all passports are invalid', function (string $passport) {
     $this->assertFalse(
-        condition: Validator::strictValidate($rule)
+        condition: validatePassport(extractStringData($passport))
     );
 })->with([
     'eyr:1972 cid:100 hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926',
@@ -102,9 +107,9 @@ it('fails with invalid passports', function (string $rule) {
     'hgt:59cm ecl:zzz eyr:2038 hcl:74454a iyr:2023 pid:3556412378 byr:2007',
 ]);
 
-it('succeeds with valid passports', function (string $rule) {
+it('can succeeds when all passports are valid', function (string $passport) {
     $this->assertTrue(
-        condition: Validator::strictValidate($rule)
+        condition: validatePassport(extractStringData($passport))
     );
 })->with([
     'pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980 hcl:#623a2f',

@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-include_once __DIR__.'/../vendor/autoload.php';
+namespace AdventOfCode2020\Day1;
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 function solve(array $puzzle, int $combination_size): int
 {

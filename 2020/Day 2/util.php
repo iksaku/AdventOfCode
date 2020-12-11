@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-include_once __DIR__.'/../vendor/autoload.php';
+namespace AdventOfCode2020\Day2;
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class Restriction {
     public function __construct(
@@ -12,39 +14,19 @@ class Restriction {
         public string $password,
     ) {}
 
-    public static function make(string $line): self
+    public static function make(string ...$lines): array
     {
-        [$restriction_count, $restriction_letter, $password] = explode(' ', $line);
+        return array_map(
+            callback: function (string $line) {
+                [$restriction_count, $restriction_letter, $password] = explode(' ', $line);
 
-        [$restriction_min, $restriction_max] = explode('-', $restriction_count);
-        $restriction_letter = str_replace(':', '', $restriction_letter);
+                [$restriction_min, $restriction_max] = explode('-', $restriction_count);
+                $restriction_letter = str_replace(':', '', $restriction_letter);
 
-        return new self((int) $restriction_min, (int) $restriction_max, $restriction_letter, $password);
-    }
-
-    public static function makeMany(array $lines): array
-    {
-        return array_map([Restriction::class, 'make'], $lines);
-    }
-
-    public function isValidForSledRentalPlace(): bool
-    {
-        $password_character_count = array_count_values(str_split($this->password));
-
-        $restriction_occurrences = $password_character_count[$this->letter] ?? 0;
-
-        return $restriction_occurrences >= $this->min_range
-            && $restriction_occurrences <= $this->max_range;
-    }
-
-    public function isValidForTobogganCorporate(): bool
-    {
-        // Note: They have no zero-index concept, but PHP does :sweat_smile:
-        $first_position = $this->min_range - 1;
-        $last_position = $this->max_range - 1;
-
-        return $this->letter === $this->password[$first_position]
-            xor $this->letter === $this->password[$last_position];
+                return new self((int) $restriction_min, (int) $restriction_max, $restriction_letter, $password);
+            },
+            array: $lines
+        );
     }
 }
 
@@ -52,8 +34,13 @@ function solveForSledRentalPlace(array $puzzle): int
 {
     return count(
         array_filter(
-            Restriction::makeMany($puzzle),
-            fn(Restriction $restriction) => $restriction->isValidForSledRentalPlace()
+            Restriction::make(...$puzzle),
+            function (Restriction $restriction) {
+                $restriction_occurrences = substr_count($restriction->password, $restriction->letter) ?? 0;
+
+                return $restriction_occurrences >= $restriction->min_range
+                    && $restriction_occurrences <= $restriction->max_range;
+            }
         )
     );
 }
@@ -62,8 +49,11 @@ function solveForTobogganCorporate(array $puzzle): int
 {
     return count(
         array_filter(
-            Restriction::makeMany($puzzle),
-            fn(Restriction $restriction) => $restriction->isValidForTobogganCorporate()
+            Restriction::make(...$puzzle),
+            fn(Restriction $restriction) =>
+                // Note: They have no zero-index concept, but PHP does :sweat_smile:
+                $restriction->letter === $restriction->password[$restriction->min_range - 1] xor
+                $restriction->letter === $restriction->password[$restriction->max_range - 1]
         )
     );
 }
