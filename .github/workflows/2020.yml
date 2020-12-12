@@ -16,7 +16,7 @@ defaults:
 
 jobs:
     ci:
-        name: Challenge Tests
+        name: Test Project
         runs-on: ubuntu-latest
         steps:
             - name: 📡 Checkout Repo
