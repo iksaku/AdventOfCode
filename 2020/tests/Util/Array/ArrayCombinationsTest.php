@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-include_once __DIR__ . '/../../../vendor/autoload.php';
-
-uses()->group('array_combinations');
+uses()->group('array', 'array_combinations');
 
 it('throws an error when trying to combine an empty array', function () {
     $this->expectException(ValueError::class);

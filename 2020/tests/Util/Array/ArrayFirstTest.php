@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-include_once __DIR__ . '/../../../vendor/autoload.php';
-
-uses()->group('array_first');
+uses()->group('array', 'array_first');
 
 it('returns first array element passing truth test', function (array $input, Closure $callback, mixed $result) {
     $this->assertEquals(

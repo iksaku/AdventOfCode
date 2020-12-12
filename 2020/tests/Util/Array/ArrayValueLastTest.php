@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-include_once __DIR__ . '/../../../vendor/autoload.php';
-
-uses()->group('array_value_last');
+uses()->group('array', 'array_value_last');
 
 it('can get the last item of an array', function (array $haystack, mixed $result) {
     $this->assertEquals(

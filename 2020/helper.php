@@ -2,68 +2,6 @@
 
 declare(strict_types=1);
 
-if (!function_exists('array_value_first')) {
-    /**
-     * Return the first element of an array.
-     *
-     * @param array $haystack
-     * @return mixed
-     */
-    function array_value_first(array $haystack): mixed
-    {
-        return $haystack[array_key_first($haystack)];
-    }
-}
-
-if (!function_exists('array_value_last')) {
-    /**
-     * Return the last element of an array.
-     *
-     * @param array $haystack
-     * @return mixed
-     */
-    function array_value_last(array $haystack): mixed
-    {
-        return $haystack[array_key_last($haystack)];
-    }
-}
-
-if (!function_exists('array_first')) {
-    /**
-     * Obtain the first element in a Traversable that passes a given truth test.
-     *
-     * @see https://github.com/illuminate/collections/blob/99889ebfe8eb73afa6859b316657f8cac6d20b1c/Arr.php#L166-L185
-     *
-     * @param array|Traversable $haystack
-     * @param Closure $callback
-     * @param mixed|null $default
-     * @return mixed
-     */
-    function array_first(array|Traversable $haystack, Closure $callback, mixed $default = null): mixed
-    {
-        foreach ($haystack as $key => $value) {
-            if ($callback($value, $key)) {
-                return $value;
-            }
-        }
-
-        return $default instanceof Closure ? $default() : $default;
-    }
-}
-
-if (!function_exists('array_wrap')) {
-    /**
-     * Wraps a non-array value into an array.
-     *
-     * @param mixed $value
-     * @return array
-     */
-    function array_wrap(mixed $value): array
-    {
-        return is_array($value) ? $value : [$value];
-    }
-}
-
 if (!function_exists('array_combinations')) {
     /**
      * Return all possible combinations from values of an array.
@@ -102,7 +40,7 @@ if (!function_exists('array_combinations')) {
             return yield from $haystack;
         }
 
-        foreach ($haystack as $key => $value) {
+        foreach ($haystack as $value) {
             foreach (array_combinations($haystack, $dimensions - 1) as $combined) {
                 yield [$value, ...array_wrap($combined)];
             }
@@ -110,7 +48,38 @@ if (!function_exists('array_combinations')) {
     }
 }
 
+
+if (!function_exists('array_first')) {
+    /**
+     * Obtain the first element in a Traversable that passes a given truth test.
+     *
+     * @see https://github.com/illuminate/collections/blob/99889ebfe8eb73afa6859b316657f8cac6d20b1c/Arr.php#L166-L185
+     *
+     * @param array|Traversable $haystack
+     * @param Closure $callback
+     * @param mixed|null $default
+     * @return mixed
+     */
+    function array_first(array|Traversable $haystack, Closure $callback, mixed $default = null): mixed
+    {
+        foreach ($haystack as $key => $value) {
+            if ($callback($value, $key)) {
+                return $value;
+            }
+        }
+
+        return $default instanceof Closure ? $default() : $default;
+    }
+}
+
 if (!function_exists('array_map_with_keys')) {
+    /**
+     * Pass each key-value pair of an array into a function.
+     *
+     * @param callable $callback
+     * @param array $array
+     * @return array
+     */
     function array_map_with_keys(callable $callback, array $array): array
     {
         $keys = array_keys($array);
@@ -118,5 +87,44 @@ if (!function_exists('array_map_with_keys')) {
         $items = array_map($callback, $array, $keys);
 
         return array_combine($keys, $items);
+    }
+}
+
+if (!function_exists('array_value_first')) {
+    /**
+     * Return the first element of an array.
+     *
+     * @param array $haystack
+     * @return mixed
+     */
+    function array_value_first(array $haystack): mixed
+    {
+        return $haystack[array_key_first($haystack)];
+    }
+}
+
+if (!function_exists('array_value_last')) {
+    /**
+     * Return the last element of an array.
+     *
+     * @param array $haystack
+     * @return mixed
+     */
+    function array_value_last(array $haystack): mixed
+    {
+        return $haystack[array_key_last($haystack)];
+    }
+}
+
+if (!function_exists('array_wrap')) {
+    /**
+     * Wraps a non-array value into an array.
+     *
+     * @param mixed $value
+     * @return array
+     */
+    function array_wrap(mixed $value): array
+    {
+        return is_array($value) ? $value : [$value];
     }
 }

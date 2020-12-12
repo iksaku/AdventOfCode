@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-include_once __DIR__ . '/../../../vendor/autoload.php';
-
-uses()->group('array_value_first');
+uses()->group('array', 'array_value_first');
 
 it('can get the first item of an array', function (array $haystack, mixed $result) {
     $this->assertEquals(
