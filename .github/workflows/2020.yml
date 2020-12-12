@@ -42,5 +42,8 @@ jobs:
             - name: 🚚 Install Composer Packages
               run: composer install --prefer-dist --no-interaction --no-suggest
 
-            - name: 🤞 Run Tests
-              run: composer test
+            - name: 🗡️️ Test Helper Functions
+              run: composer test -- --testsuite=Helper
+
+            - name: 🧩 Test Daily Puzzles
+              run: composer test -- --testsuite=Puzzles
