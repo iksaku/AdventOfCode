@@ -6,8 +6,8 @@
     colors="true"
 >
     <testsuites>
-        <testsuite name="Util">
-            <directory>./tests/Util</directory>
+        <testsuite name="Helper">
+            <directory>./tests/Helper</directory>
         </testsuite>
         <testsuite name="Puzzles">
             <directory>./tests/Puzzles</directory>
