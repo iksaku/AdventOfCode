@@ -52,7 +52,7 @@ class Puzzle extends BasePuzzle
 
             $score = 0;
 
-            foreach ($this->puzzleLineByLine() as $turn) {
+            foreach ($this->puzzleInputLines() as $turn) {
                 [$opponentMove, $myMove] = explode(' ', $turn);
 
                 $opponentMove = self::OPPONENT_STRATEGY[$opponentMove];
@@ -90,7 +90,7 @@ class Puzzle extends BasePuzzle
 
             $score = 0;
 
-            foreach ($this->puzzleLineByLine() as $turn) {
+            foreach ($this->puzzleInputLines() as $turn) {
                 [$opponentMove, $desiredResult] = explode(' ', $turn);
 
                 $opponentMove = self::OPPONENT_STRATEGY[$opponentMove];

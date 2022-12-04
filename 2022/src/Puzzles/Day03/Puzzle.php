@@ -16,7 +16,7 @@ class Puzzle extends BasePuzzle
         yield value(function () {
             $sumOfPriorities = 0;
 
-            foreach ($this->puzzleLineByLine() as $items) {
+            foreach ($this->puzzleInputLines() as $items) {
                 $compartments = array_chunk(str_split($items), strlen($items) / 2);
 
                 $sharedItem = array_value_first(array_intersect(...$compartments));
@@ -31,7 +31,7 @@ class Puzzle extends BasePuzzle
         yield value(function () {
             $sumOfBadgePriorities = 0;
 
-            foreach ($this->puzzleLineByLine(chunkLength: 3) as $team) {
+            foreach ($this->puzzleInputLines(chunkLength: 3) as $team) {
                 $team = array_map(
                     str_split(...),
                     $team

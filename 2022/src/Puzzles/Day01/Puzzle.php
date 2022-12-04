@@ -36,7 +36,7 @@ class Puzzle extends BasePuzzle
         $compileCalories = function (): Generator {
             $calories = 0;
 
-            foreach ($this->puzzleLineByLine() as $line) {
+            foreach ($this->puzzleInputLines() as $line) {
                 if (filled($line)) {
                     $calories += (int) $line;
                     continue;

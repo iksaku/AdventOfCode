@@ -13,8 +13,8 @@ use function Termwind\renderUsing;
 
 abstract class BasePuzzle extends Command
 {
-    public readonly InputInterface $input;
-    public readonly OutputInterface $output;
+    public readonly InputInterface $commandInput;
+    public readonly OutputInterface $commandOutput;
 
     protected function configure(): void
     {
@@ -23,8 +23,8 @@ abstract class BasePuzzle extends Command
 
     final protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->input = $input;
-        $this->output = $output;
+        $this->commandInput = $input;
+        $this->commandOutput = $output;
 
         renderUsing($output);
 
@@ -52,10 +52,10 @@ abstract class BasePuzzle extends Command
 
     protected function inExampleMode(): bool
     {
-        return $this->input->getOption('example');
+        return $this->commandInput->getOption('example');
     }
 
-    private function getPuzzleInput(): string
+    private function puzzleInput(): string
     {
         static $cache = null;
 
@@ -67,11 +67,11 @@ abstract class BasePuzzle extends Command
         });
     }
 
-    protected function puzzleLineByLine(?int $chunkLength = null): array
+    protected function puzzleInputLines(?int $chunkLength = null): array
     {
         static $lines = null;
 
-        $lines ??= explode(PHP_EOL, $this->getPuzzleInput());
+        $lines ??= explode(PHP_EOL, $this->puzzleInput());
 
         if (! is_null($chunkLength)) {
             return array_chunk($lines, $chunkLength);
