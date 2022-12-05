@@ -37,3 +37,16 @@ function array_value_first(array $array): mixed
 {
     return $array[array_key_first($array)];
 }
+
+function array_transpose(array $array): array
+{
+    return array_map(null, ...$array);
+}
+
+function array_rotate_right(array $array): array
+{
+    return array_map(
+        array_reverse(...),
+        array_transpose($array)
+    );
+}

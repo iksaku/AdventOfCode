@@ -55,7 +55,7 @@ abstract class BasePuzzle extends Command
         return $this->commandInput->getOption('example');
     }
 
-    private function puzzleInput(): string
+    protected function puzzleInput(): string
     {
         static $cache = null;
 
