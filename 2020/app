@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require __DIR__ .'/vendor/autoload.php';
+
+use AdventOfCode2020\BasePuzzle;
+use Symfony\Component\Console\Application;
+
+$application = new Application(name: 'Advent of Code', version: '2020');
+
+foreach (new DirectoryIterator(__DIR__ . '/src/Puzzles') as $file) {
+    if ($file->isDot() || ! $file->isDir()) {
+        continue;
+    }
+
+    $name = $file->getBasename();
+    if (! preg_match('/^Day\d{2}$/', $name)) {
+        continue;
+    }
+
+    $class = "AdventOfCode2020\\Puzzles\\{$name}\\Puzzle";
+    if (! class_exists($class) || ! is_subclass_of($class, BasePuzzle::class)) {
+        continue;
+    }
+
+    $application->add(new $class);
+}
+
+$application->run();
