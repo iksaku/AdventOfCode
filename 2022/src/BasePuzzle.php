@@ -55,28 +55,33 @@ abstract class BasePuzzle extends Command
         return $this->commandInput->getOption('example');
     }
 
+    private function puzzleInputFilePath(): string
+    {
+        $path = dirname((new ReflectionClass(static::class))->getFileName());
+        $path .= '/' . ($this->inExampleMode() ? 'example.txt' : 'input.txt');
+
+        return $path;
+    }
+
     protected function puzzleInput(): string
     {
         static $cache = null;
 
-        return $cache ??= value(function () {
-            $path = dirname((new ReflectionClass(static::class))->getFileName());
-            $path .= '/' . ($this->inExampleMode() ? 'example.txt' : 'input.txt');
-
-            return rtrim(file_get_contents($path));
-        });
+        return $cache ??= rtrim(file_get_contents($this->puzzleInputFilePath()));
     }
 
-    protected function puzzleInputLines(?int $chunkLength = null): array
+    protected function puzzleInputLines(): array
     {
         static $lines = null;
 
-        $lines ??= explode(PHP_EOL, $this->puzzleInput());
+        return $lines ??= value(function () {
+            $lines = file($this->puzzleInputFilePath(), FILE_IGNORE_NEW_LINES);
 
-        if (! is_null($chunkLength)) {
-            return array_chunk($lines, $chunkLength);
-        }
+            if (blank($lines[array_key_last($lines)])) {
+                array_pop($lines);
+            }
 
-        return $lines;
+            return $lines;
+        });
     }
 }

@@ -14,43 +14,42 @@ class Puzzle extends BasePuzzle
     protected function handle(): Generator
     {
         // Part 1
-        yield value(function () {
-            $fullyOverlapCount = 0;
-
-            foreach ($this->puzzleInputLines() as $pair) {
-                [$first, $second] = array_map(
-                    fn (string $range) => range(...explode('-', $range, limit: 2)),
-                    explode(',', $pair)
-                );
+        yield iterable_count_using(
+            iterable: $this->compiledAssignments(),
+            callback: function (array $pair): bool {
+                [$first, $second] = $pair;
 
                 $overlaps = count(array_intersect($first, $second));
 
-                if (count($first) === $overlaps || count($second) === $overlaps) {
-                    ++$fullyOverlapCount;
-                }
+                return count($first) === $overlaps || count($second) === $overlaps;
             }
-
-            return $fullyOverlapCount;
-        });
+        );
 
         // Part 2
-        yield value(function () {
-            $overlapCount = 0;
-
-            foreach ($this->puzzleInputLines() as $pair) {
-                [$first, $second] = array_map(
-                    fn (string $range) => range(...explode('-', $range, limit: 2)),
-                    explode(',', $pair)
-                );
+        yield iterable_count_using(
+            iterable: $this->compiledAssignments(),
+            callback: function (array $pair): bool {
+                [$first, $second] = $pair;
 
                 $overlaps = count(array_intersect($first, $second));
 
-                if ($overlaps > 0) {
-                    ++$overlapCount;
-                }
+                return $overlaps > 0;
             }
+        );
+    }
 
-            return $overlapCount;
-        });
+    protected function compiledAssignments(): array
+    {
+        static $cache = null;
+
+        return $cache ??= array_map(
+            callback: fn (string $pair) => array_map(
+                // 2. Parse ranges
+                callback: fn (string $range) => range(...explode('-', $range, limit: 2)),
+                // 1. Split pairs.
+                array: explode(',', $pair)
+            ),
+            array: $this->puzzleInputLines()
+        );
     }
 }

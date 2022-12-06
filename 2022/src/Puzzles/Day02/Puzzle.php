@@ -24,84 +24,61 @@ class Puzzle extends BasePuzzle
         self::SCISSORS => 3,
     ];
 
+    /** @var array<string, Choice> */
     protected const OPPONENT_STRATEGY = [
-        'A' => self::ROCK,
-        'B' => self::PAPER,
-        'C' => self::SCISSORS,
+        'A' => Choice::ROCK,
+        'B' => Choice::PAPER,
+        'C' => Choice::SCISSORS,
     ];
 
     protected function handle(): Generator
     {
         // Part 1
-        yield value(function () {
-            $myStrategy = [
-                'X' => self::ROCK,
-                'Y' => self::PAPER,
-                'Z' => self::SCISSORS,
-            ];
+        yield iterable_sum_using(
+            iterable: $this->puzzleInputLines(),
+            callback: function (string $turn) {
+                /** @var array<string, Choice> $myStrategy */
+                $myStrategy = [
+                    'X' => Choice::ROCK,
+                    'Y' => Choice::PAPER,
+                    'Z' => Choice::SCISSORS,
+                ];
 
-            $duel = fn (string $opponent, $me) => match (true) {
-                $opponent === self::ROCK && $me === self::SCISSORS,
-                    $opponent === self::PAPER && $me === self::ROCK,
-                    $opponent === self::SCISSORS && $me === self::PAPER => self::LOST,
-
-                $opponent === $me => self::DRAW,
-
-                default => self::WIN
-            };
-
-            $score = 0;
-
-            foreach ($this->puzzleInputLines() as $turn) {
                 [$opponentMove, $myMove] = explode(' ', $turn);
 
                 $opponentMove = self::OPPONENT_STRATEGY[$opponentMove];
                 $myMove = $myStrategy[$myMove];
 
-                $score += self::MOVE_SCORE[$myMove] + $duel($opponentMove, $myMove);
+                return $myMove->score() + $myMove->duel($opponentMove)->value;
             }
-
-            return $score;
-        });
+        );
 
         // Part 2
-        yield value(function () {
-            $resultStrategy = [
-                'X' => self::LOST,
-                'Y' => self::DRAW,
-                'Z' => self::WIN,
-            ];
+        yield iterable_sum_using(
+            iterable: $this->puzzleInputLines(),
+            callback: function (string $turn) {
+                /** @var array<string, Outcome> $resultStrategy */
+                $resultStrategy = [
+                    'X' => Outcome::LOST,
+                    'Y' => Outcome::DRAW,
+                    'Z' => Outcome::WIN,
+                ];
 
-            $obtainMoveBasedOnResult = fn (string $opponentMove, int $desiredResult) => match ($desiredResult) {
-                self::DRAW => $opponentMove,
-
-                self::LOST => match ($opponentMove) {
-                    self::ROCK => self::SCISSORS,
-                    self::PAPER => self::ROCK,
-                    self::SCISSORS => self::PAPER,
-                },
-
-                self::WIN => match ($opponentMove) {
-                    self::ROCK => self::PAPER,
-                    self::PAPER => self::SCISSORS,
-                    self::SCISSORS => self::ROCK,
-                },
-            };
-
-            $score = 0;
-
-            foreach ($this->puzzleInputLines() as $turn) {
                 [$opponentMove, $desiredResult] = explode(' ', $turn);
 
                 $opponentMove = self::OPPONENT_STRATEGY[$opponentMove];
                 $desiredResult = $resultStrategy[$desiredResult];
 
-                $myMove = $obtainMoveBasedOnResult($opponentMove, $desiredResult);
+                $myMove = match ($desiredResult) {
+                    Outcome::DRAW => $opponentMove,
 
-                $score += self::MOVE_SCORE[$myMove] + $desiredResult;
+                    Outcome::LOST => $opponentMove->forte(),
+
+                    Outcome::WIN => $opponentMove->weakness(),
+                };
+
+                return $myMove->score() + $desiredResult->value;
             }
-
-            return $score;
-        });
+        );
     }
 }

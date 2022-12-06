@@ -33,22 +33,11 @@ class Puzzle extends BasePuzzle
     {
         static $cache = null;
 
-        $compileCalories = function (): Generator {
-            $calories = 0;
-
-            foreach ($this->puzzleInputLines() as $line) {
-                if (filled($line)) {
-                    $calories += (int) $line;
-                    continue;
-                }
-
-                yield $calories;
-                $calories = 0;
-            }
-
-            yield $calories;
-        };
-
-        return $cache ??= iterator_to_array($compileCalories());
+        return $cache ??= array_map(
+            // 2. Sum calories each elf is carrying.
+            callback: fn (string $line) => array_sum(explode("\n", $line)),
+            // 1. Segregate elves by input's empty lines.
+            array: explode("\n\n", $this->puzzleInput())
+        );
     }
 }

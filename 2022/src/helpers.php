@@ -50,3 +50,31 @@ function array_rotate_right(array $array): array
         array_transpose($array)
     );
 }
+
+function iterable_reduce(iterable $iterable, Closure $callback, mixed $initial = null): mixed
+{
+    $result = $initial;
+
+    foreach ($iterable as $value) {
+        $result = $callback($result, $value);
+    }
+
+    return $result;
+}
+
+function iterable_sum_using(iterable $iterable, Closure $callback): int
+{
+    return iterable_reduce(
+        iterable: $iterable,
+        callback: fn (int $result, mixed $value) => $result + $callback($value),
+        initial: 0
+    );
+}
+
+function iterable_count_using(iterable $iterable, Closure $callback): int
+{
+    return iterable_sum_using(
+        iterable: $iterable,
+        callback: fn (mixed $value) => (int) (bool) $callback($value)
+    );
+}

@@ -13,25 +13,21 @@ class Puzzle extends BasePuzzle
     protected function handle(): Generator
     {
         // Part 1
-        yield value(function () {
-            $sumOfPriorities = 0;
-
-            foreach ($this->puzzleInputLines() as $items) {
+        yield iterable_sum_using(
+            iterable: $this->puzzleInputLines(),
+            callback: function (string $items) {
                 $compartments = array_chunk(str_split($items), strlen($items) / 2);
 
                 $sharedItem = array_value_first(array_intersect(...$compartments));
 
-                $sumOfPriorities += $this->itemPriority($sharedItem);
+                return $this->itemPriority($sharedItem);
             }
-
-            return $sumOfPriorities;
-        });
+        );
 
         // Part 2
-        yield value(function () {
-            $sumOfBadgePriorities = 0;
-
-            foreach ($this->puzzleInputLines(chunkLength: 3) as $team) {
+        yield iterable_sum_using(
+            iterable: array_chunk($this->puzzleInputLines(), length: 3),
+            callback: function (array $team) {
                 $team = array_map(
                     str_split(...),
                     $team
@@ -39,11 +35,9 @@ class Puzzle extends BasePuzzle
 
                 $badge = array_value_first(array_intersect(...$team));
 
-                $sumOfBadgePriorities += $this->itemPriority($badge);
+                return $this->itemPriority($badge);
             }
-
-            return $sumOfBadgePriorities;
-        });
+        );
     }
 
     protected function itemPriority(string $item): int
