@@ -55,8 +55,8 @@ function iterable_reduce(iterable $iterable, Closure $callback, mixed $initial =
 {
     $result = $initial;
 
-    foreach ($iterable as $value) {
-        $result = $callback($result, $value);
+    foreach ($iterable as $key => $value) {
+        $result = $callback($result, $value, $key);
     }
 
     return $result;
@@ -66,7 +66,7 @@ function iterable_sum_using(iterable $iterable, Closure $callback): int
 {
     return iterable_reduce(
         iterable: $iterable,
-        callback: fn (int $result, mixed $value) => $result + $callback($value),
+        callback: fn (int $result, mixed $value, mixed $key) => $result + $callback($value, $key),
         initial: 0
     );
 }
@@ -75,6 +75,22 @@ function iterable_count_using(iterable $iterable, Closure $callback): int
 {
     return iterable_sum_using(
         iterable: $iterable,
-        callback: fn (mixed $value) => (int) (bool) $callback($value)
+        callback: fn (mixed $value, mixed $key) => (int) (bool) $callback($value, $key)
     );
+}
+
+function iterable_filter_using(iterable $iterable, Closure $callback): Generator
+{
+    foreach ($iterable as $key => $value) {
+        if ($callback($value, $key)) {
+            yield $key => $value;
+        }
+    }
+}
+
+function iterable_map_using(iterable $iterable, Closure $callback): Generator
+{
+    foreach ($iterable as $key => $value) {
+        yield $key => $callback($value, $key);
+    }
 }
