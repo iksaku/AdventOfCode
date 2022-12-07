@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AdventOfCode2020\Puzzles\Day13;
 
-use AdventOfCode2020\AnswerNotFoundException;
 use AdventOfCode2020\BasePuzzle;
 use Generator;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -14,8 +13,6 @@ class Puzzle extends BasePuzzle
 {
     protected function handle(): Generator
     {
-        ray()->clearAll();
-
         // Part 1
         yield value(function () {
             [$timestamp, $buses] = $this->compiledInput();
