@@ -46,7 +46,7 @@ class Puzzle extends BasePuzzle
             return [$mainPosition, $mainValue];
         }
 
-        throw new AnswerNotFoundException(part: 1);
+        throw new AnswerNotFoundException();
     }
 
     protected function findWeakness(int $position, int $invalidNumber): int
@@ -69,6 +69,6 @@ class Puzzle extends BasePuzzle
             }
         }
 
-        throw new AnswerNotFoundException(part: 2);
+        throw new AnswerNotFoundException();
     }
 }

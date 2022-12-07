@@ -29,6 +29,6 @@ class Puzzle extends BasePuzzle
             }
         }
 
-        throw new AnswerNotFoundException($part);
+        throw new AnswerNotFoundException();
     }
 }

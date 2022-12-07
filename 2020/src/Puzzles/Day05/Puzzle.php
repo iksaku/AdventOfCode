@@ -40,7 +40,7 @@ class Puzzle extends BasePuzzle
                 ++$min;
             }
 
-            throw new AnswerNotFoundException(part: 2);
+            throw new AnswerNotFoundException();
         });
     }
 

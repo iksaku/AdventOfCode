@@ -37,7 +37,7 @@ class Sandbox
             $current = $instructions[$this->position] ?? null;
 
             if (is_null($current)) {
-                throw new AnswerNotFoundException(part: 2);
+                throw new AnswerNotFoundException();
             }
 
             if ($current->hasInverse()) {

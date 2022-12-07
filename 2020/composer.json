@@ -11,6 +11,7 @@
     ],
     "require": {
         "php": "^8.1",
+        "ext-gmp": "*",
         "nunomaduro/termwind": "^1.14",
         "spatie/ray": "^1.36",
         "symfony/console": "^6.2"

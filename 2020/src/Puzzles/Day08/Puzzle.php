@@ -24,7 +24,7 @@ class Puzzle extends BasePuzzle
                 return $sandbox->accumulator;
             }
 
-            throw new AnswerNotFoundException(part: 1);
+            throw new AnswerNotFoundException();
         });
 
         // Part 2

@@ -95,8 +95,8 @@ function iterable_reduce(iterable $iterable, Closure $callback, mixed $initial =
 {
     $result = $initial;
 
-    foreach ($iterable as $value) {
-        $result = $callback($result, $value);
+    foreach ($iterable as $key => $value) {
+        $result = $callback($result, $value, $key);
     }
 
     return $result;
@@ -121,8 +121,8 @@ function iterable_count_using(iterable $iterable, Closure $callback): int
 
 function iterable_map(iterable $iterable, Closure $callback): Generator
 {
-    foreach ($iterable as $item) {
-        yield $callback($item);
+    foreach ($iterable as $key => $item) {
+        yield $callback($item, $key);
     }
 }
 
@@ -132,6 +132,11 @@ function array_deep_clone(array $array): array
         callback: fn (mixed $value) => is_object($value) ? clone $value : $value,
         array: $array
     );
+}
+
+function array_value_first(array $haystack): mixed
+{
+    return $haystack[array_key_first($haystack)];
 }
 
 function array_value_last(array $haystack): mixed
