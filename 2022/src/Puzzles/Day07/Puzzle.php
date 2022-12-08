@@ -13,7 +13,6 @@ class Puzzle extends BasePuzzle
 {
     protected function handle(): Generator
     {
-        ray()->clearAll();
         $filesystem = $this->rootFilesystem();
 
         // Part 1

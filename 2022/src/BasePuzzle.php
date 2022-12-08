@@ -28,6 +28,8 @@ abstract class BasePuzzle extends Command
 
         renderUsing($output);
 
+        ray()->clearAll();
+
         foreach ($this->handle() as $part => $result) {
             ++$part;
 
