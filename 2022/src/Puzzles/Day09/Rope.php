@@ -35,4 +35,11 @@ class Rope
     {
         return array_value_last($this->knots);
     }
+
+    public function follow(array $instructions): void
+    {
+        foreach ($instructions as $instruction) {
+            $this->head()->walk(...$instruction);
+        }
+    }
 }

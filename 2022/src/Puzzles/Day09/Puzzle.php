@@ -18,9 +18,7 @@ class Puzzle extends BasePuzzle
             $rope = new Rope();
             $rope->tail()->enableTracking();
 
-            foreach ($this->instructions() as $instruction) {
-                $rope->head()->walk(...$instruction);
-            }
+            $rope->follow($this->instructions());
 
             return iterable_sum_using(
                 iterable:  $rope->tail()->tracker,
@@ -33,9 +31,7 @@ class Puzzle extends BasePuzzle
             $rope = new Rope(length: 10);
             $rope->tail()->enableTracking();
 
-            foreach ($this->instructions() as $instruction) {
-                $rope->head()->walk(...$instruction);
-            }
+            $rope->follow($this->instructions());
 
             return iterable_sum_using(
                 iterable: $rope->tail()->tracker,
