@@ -38,6 +38,11 @@ function array_value_first(array $array): mixed
     return $array[array_key_first($array)];
 }
 
+function array_value_last(array $array): mixed
+{
+    return $array[array_key_last($array)];
+}
+
 function array_transpose(array $array): array
 {
     return array_map(null, ...$array);
@@ -46,8 +51,8 @@ function array_transpose(array $array): array
 function array_rotate_right(array $array): array
 {
     return array_map(
-        array_reverse(...),
-        array_transpose($array)
+        callback: array_reverse(...),
+        array: array_transpose($array)
     );
 }
 
